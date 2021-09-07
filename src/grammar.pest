@@ -1,0 +1,27 @@
+WHITESPACE = _{ " " }
+
+char = { ASCII_ALPHANUMERIC | "." | "_" | "/" | "-"  }
+
+name = { char+ }
+
+// values
+inner_value = { (char | "=" | ":" | "@" | "<" | ">")* }
+single_value = { "\"" ~ inner_value ~ "\"" }
+value_list = { "[" ~ (single_value ~ ",")* ~ single_value ~ "]" }
+value = { single_value | value_list }
+
+// section
+section = { "[" ~ name ~ "]" }
+
+/// property pair is a name and value, separated by an equal sign.
+property = { name ~ "=" ~ value }
+
+// comment starts with #
+comment = { "#" ~ inner_value }
+
+/// A Systemd unit file structure
+file = {
+    SOI ~
+    ((section | property | comment)? ~ NEWLINE)* ~
+    EOI
+}
