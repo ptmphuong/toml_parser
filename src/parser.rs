@@ -10,11 +10,8 @@ struct TomlParser;
 
 pub type ParsedMap = HashMap<String, HashMap<String, Vec<Value>>>;
 
-pub fn parse_toml(filepath: &str) -> Result<ParsedMap> {
-    let new_file = fs::read_to_string(filepath)
-        .with_context(|| format!("failed to read file from {}", filepath))?;
-
-    let file = TomlParser::parse(Rule::file, &new_file)
+pub fn parse_toml(toml_file: &str) -> Result<ParsedMap> {
+    let file = TomlParser::parse(Rule::file, &toml_file)
         .with_context(|| format!("failed to parse"))?
         .next()
         .unwrap();

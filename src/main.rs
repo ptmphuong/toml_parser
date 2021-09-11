@@ -6,12 +6,16 @@
  *
 */
 
+use anyhow::{Context, Result};
+use std::fs;
 use toml_parser::parser;
 
 fn main() {
     let this_cargo = "files/this_Cargo.toml";
 
-    let parsed_cargo_toml = parser::parse_toml(this_cargo);
+    let toml_file = fs::read_to_string(this_cargo).expect("cannot read file");
+
+    let parsed_cargo_toml = parser::parse_toml(&toml_file);
     println!("{:?}", parsed_cargo_toml);
 
     if let Ok(parsed_map) = parsed_cargo_toml {
