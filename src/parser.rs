@@ -50,7 +50,6 @@ pub fn parse_toml(filepath: &str) -> Result<ParsedMap> {
                 entry.push(system_val);
             }
 
-            Rule::comment => (),
             Rule::EOI => (),
             _ => unreachable!(),
         }
