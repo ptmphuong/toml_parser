@@ -1,3 +1,4 @@
+use crate::value::Value;
 use anyhow::{Context, Result};
 use pest::Parser;
 use std::collections::HashMap;
@@ -6,11 +7,6 @@ use std::fs;
 #[derive(Parser)]
 #[grammar = "grammar.pest"]
 struct TomlParser;
-
-#[derive(Debug, Clone)]
-pub enum Value {
-    String(String),
-}
 
 pub type ParsedMap = HashMap<String, HashMap<String, Vec<Value>>>;
 

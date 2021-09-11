@@ -1,5 +1,5 @@
 WHITESPACE = _{ " " }
-COMMENT = _{ "# " ~ ANY+ }
+COMMENT = _{ "#" ~ ANY+ }
 
 char = { ASCII_ALPHANUMERIC | "." | "_" | "/" | "-"  }
 
